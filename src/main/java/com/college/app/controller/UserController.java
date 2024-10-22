@@ -17,11 +17,12 @@ public class UserController {
 
     @PostMapping("/create")
     public User createUser(@RequestBody User user) {
-        return userService.CreteUser(user);
+        return userService.createUser(user);
     }
 
     @GetMapping
     public List<User> getAllUsers() {
+
         return userService.getAllUsers();
     }
 }

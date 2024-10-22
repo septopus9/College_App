@@ -6,13 +6,17 @@ import jakarta.persistence.*;
 @Entity
 public class AdministratorProfile {
     @Id
-    private long user_id;
+    private long user_id; //Foreign key linking to the User entity.
     @OneToOne
     @JsonIgnore
     @MapsId()
     @JoinColumn(name = "user_id;")
-    private User user;
+    private User user; //Foreign key linking to the User entity.
     private String photo;
+
+    @ManyToOne
+    @JoinColumn(name = "department_id")
+    private Department  department; //Foreign key linking to the Department entity.
 
     public AdministratorProfile() {
     }
@@ -45,5 +49,13 @@ public class AdministratorProfile {
 
     public void setPhoto(String photo) {
         this.photo = photo;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 }

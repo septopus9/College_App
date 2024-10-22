@@ -3,18 +3,29 @@ package com.college.app.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 public class StudentProfile {
     @Id
-    private long user_id;
+    private long user_id; //Foreign key linking to the User entity.
 
     @OneToOne
     @JsonIgnore
     @MapsId
     @JoinColumn(name = "user_id")
-    private User user;
+    private User user; // Foreign key linking to the User entity.
     private String photo;
     private String year;
+
+    @ManyToOne()
+    @JoinColumn(name = "department_id")
+    private Department department; //Foreign key linking to the Department entity.
+
+
+    @OneToMany(mappedBy ="studentProfile" )
+    private List<Enrollment> enrollments = new ArrayList<>();
 
     public StudentProfile() {
     }
@@ -57,5 +68,21 @@ public class StudentProfile {
 
     public void setYear(String year) {
         this.year = year;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+
+    public List<Enrollment> getEnrollments() {
+        return enrollments;
+    }
+
+    public void setEnrollments(List<Enrollment> enrollments) {
+        this.enrollments = enrollments;
     }
 }

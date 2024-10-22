@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 public class User {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String username;
     private String password;
@@ -26,21 +27,8 @@ public class User {
     public User() {
     }
 
-    public User(long id, String username, String password,
-                Role role, String name, String phone) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-        this.role = role;
-        this.name = name;
-        this.phone = phone;
-    }
-
-    public User(long id, String username, String password,
-                Role role, String name, String phone,
-                StudentProfile studentProfile,
-                AdministratorProfile administratorProfile,
-                FacultyProfile facultyProfile) {
+    public User(long id, String username, String password, Role role, String name, String phone, StudentProfile studentProfile,
+                AdministratorProfile administratorProfile, FacultyProfile facultyProfile) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -123,4 +111,5 @@ public class User {
     public void setFacultyProfile(FacultyProfile facultyProfile) {
         this.facultyProfile = facultyProfile;
     }
+
 }

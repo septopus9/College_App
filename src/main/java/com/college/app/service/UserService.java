@@ -28,22 +28,25 @@ public class UserService {
     @Autowired
     private AdministratorProfileRepository administratorProfileRepository;
 
-    public User CreteUser (User user){
+
+
+    public User createUser(User user) {
         User savedUser = userRepository.save(user);
-        switch (user.getRole()){
-            case STUDENT :
-                    StudentProfile newStudent  = new StudentProfile();
-                    newStudent.setUser(savedUser);
-                    studentProfileRepository.save(newStudent);
-                    break;
-            case FACULTY_MEMBER :
 
+        switch (user.getRole()) {
+            case STUDENT:
+                StudentProfile newStudent = new StudentProfile();
+                newStudent.setUser(savedUser);
+                studentProfileRepository.save(newStudent);
+                break;
+
+            case FACULTY_MEMBER:
                 FacultyProfile newFaculty = new FacultyProfile();
-
                 newFaculty.setUser(savedUser);
                 facultyProfileRepository.save(newFaculty);
                 break;
-            case ADMINISTRATOR :
+
+            case ADMINISTRATOR:
                 AdministratorProfile newAdmin = new AdministratorProfile();
                 newAdmin.setUser(savedUser);
                 administratorProfileRepository.save(newAdmin);
@@ -52,7 +55,8 @@ public class UserService {
             default:
                 throw new IllegalArgumentException("Invalid role specified.");
         }
-        return savedUser;
+
+        return savedUser;  // You might want to consider returning a response that includes the profile as well.
     }
 
 
