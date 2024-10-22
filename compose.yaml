@@ -1,0 +1,34 @@
+services:
+  postgres-db:
+    image: postgres:latest
+    container_name: postgres
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: mypassword
+      POSTGRES_DB: collegeApp
+    ports:
+      - "5432:5432" # Exposes PostgreSQL to the host machine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data # Persistent storage
+    networks:
+      - my_network
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin1
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "8081:80" # pgAdmin available on localhost:8081
+    depends_on:
+      - postgres-db # Ensures PostgreSQL starts before pgAdmin
+    networks:
+      - my_network
+
+volumes:
+  postgres_data:
+
+networks:
+  my_network:
+    driver: bridge
