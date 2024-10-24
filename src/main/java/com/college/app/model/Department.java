@@ -1,5 +1,6 @@
 package com.college.app.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -9,23 +10,41 @@ import java.util.List;
 public class Department {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String name;
     private String description;
 
 
     @OneToMany(mappedBy = "department")
+    @JsonManagedReference
     private List<StudentProfile> studentProfile=new ArrayList<>();
 
     @OneToMany(mappedBy = "department")
+    @JsonManagedReference
     private List<FacultyProfile> facultyProfiles = new ArrayList<>();
 
     @OneToMany(mappedBy = "department")
+    @JsonManagedReference
     private List<Course> courses = new ArrayList<>();
 
     @OneToMany(mappedBy = "department")
+    @JsonManagedReference
     private List<AdministratorProfile> administratorProfiles =new ArrayList<>();
+
+    public Department() {
+    }
+
+    public Department(long id, String name, String description, List<StudentProfile> studentProfile, List<FacultyProfile> facultyProfiles,
+                      List<Course> courses, List<AdministratorProfile> administratorProfiles) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.studentProfile = studentProfile;
+        this.facultyProfiles = facultyProfiles;
+        this.courses = courses;
+        this.administratorProfiles = administratorProfiles;
+    }
 
     public long getId() {
         return id;
@@ -82,4 +101,6 @@ public class Department {
     public void setAdministratorProfiles(List<AdministratorProfile> administratorProfiles) {
         this.administratorProfiles = administratorProfiles;
     }
+
+
 }

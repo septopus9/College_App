@@ -1,5 +1,6 @@
 package com.college.app.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -20,10 +21,12 @@ public class Course {
 
     @ManyToOne
     @JoinColumn(name = "faculty_id", nullable = false) // Foreign key to the FacultyProfile entity
+    @JsonIgnore
     private FacultyProfile facultyProfile;
 
 
     @OneToMany(mappedBy = "course")
+    @JsonIgnore
     private List<Enrollment> enrollments = new ArrayList<>();
 
     public long getId() {

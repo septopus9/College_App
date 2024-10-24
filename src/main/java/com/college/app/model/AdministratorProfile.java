@@ -16,6 +16,7 @@ public class AdministratorProfile {
 
     @ManyToOne
     @JoinColumn(name = "department_id")
+    @JsonIgnore
     private Department  department; //Foreign key linking to the Department entity.
 
     public AdministratorProfile() {

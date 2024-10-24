@@ -14,17 +14,19 @@ public class StudentProfile {
     @OneToOne
     @JsonIgnore
     @MapsId
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id",nullable = false)
     private User user; // Foreign key linking to the User entity.
     private String photo;
     private String year;
 
     @ManyToOne()
     @JoinColumn(name = "department_id")
+    @JsonIgnore
     private Department department; //Foreign key linking to the Department entity.
 
 
     @OneToMany(mappedBy ="studentProfile" )
+    @JsonIgnore
     private List<Enrollment> enrollments = new ArrayList<>();
 
     public StudentProfile() {

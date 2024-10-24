@@ -1,5 +1,6 @@
 package com.college.app.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -7,7 +8,7 @@ import jakarta.persistence.*;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String username;
     private String password;
@@ -16,12 +17,15 @@ public class User {
     private String name;
     private String phone;
 
-    @OneToOne(mappedBy = "user")
+    @OneToOne(mappedBy = "user",cascade = CascadeType.ALL)
+    @JsonIgnore
     private StudentProfile studentProfile;
-    @OneToOne(mappedBy = "user")
+    @OneToOne(mappedBy = "user",cascade = CascadeType.ALL)
+    @JsonIgnore
     private AdministratorProfile administratorProfile;
 
-    @OneToOne(mappedBy = "user")
+    @OneToOne(mappedBy = "user",cascade = CascadeType.ALL)
+    @JsonIgnore
     private FacultyProfile facultyProfile;
 
     public User() {

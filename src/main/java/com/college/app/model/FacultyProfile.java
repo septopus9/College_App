@@ -20,10 +20,12 @@ public class FacultyProfile {
     private String office_hours;
 
     @OneToMany(mappedBy = "facultyProfile")
+    @JsonIgnore
     private List<Course> courses = new ArrayList<>();
 
     @ManyToOne()
     @JoinColumn(name = "department_id")
+    @JsonIgnore
     private Department department; //Foreign key linking to the Department entity.
     //Foreign key linking to the Department entity.
 

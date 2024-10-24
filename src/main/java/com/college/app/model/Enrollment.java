@@ -1,5 +1,6 @@
 package com.college.app.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -11,12 +12,14 @@ public class Enrollment {
 
     @ManyToOne
     @JoinColumn(name = "student_id") // //Foreign key linking to the StudentProfile entity
+    @JsonIgnore
     private StudentProfile studentProfile; //Foreign key linking to the StudentProfile entity
 
 
 
     @ManyToOne
     @JoinColumn(name = "course_id")
+    @JsonIgnore
     private Course course; //Foreign key linking to the Course entity.
 
     public long getId() {
